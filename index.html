@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern Exteriors — Financing Calculator</title>
+  <style>
+    :root {
+      --navy: #0a2540;
+      --navy-2: #123b63;
+      --steel: #1b75e0;
+      --amber: #f5a623;
+      --amber-dark: #d98a0b;
+      --ink: #14202e;
+      --muted: #5b6b7b;
+      --line: #e3e9f0;
+      --bg: #f3f6fa;
+      --card: #ffffff;
+      --good: #1f9d55;
+      --radius: 16px;
+      --shadow: 0 10px 30px rgba(10, 37, 64, 0.10);
+      --shadow-sm: 0 2px 8px rgba(10, 37, 64, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 18px 60px;
+    }
+
+    /* ---------- Header / brand ---------- */
+    header.brand {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
+      color: #fff;
+      padding: 28px 18px 26px;
+      text-align: center;
+    }
+    .brand-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      letter-spacing: 0.02em;
+    }
+    .logo .mark {
+      width: 40px; height: 40px;
+      flex: none;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: var(--amber);
+      box-shadow: 0 4px 14px rgba(245, 166, 35, 0.4);
+    }
+    .logo .mark svg { display: block; }
+    .logo .word {
+      text-align: left;
+      line-height: 1;
+    }
+    .logo .word .main {
+      font-size: 22px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+    .logo .word .sub {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-top: 4px;
+      padding-left: 2px;
+    }
+    header.brand h1 {
+      margin: 6px 0 0;
+      font-size: 15px;
+      font-weight: 500;
+      color: #c7d6e6;
+      letter-spacing: 0.02em;
+    }
+
+    /* ---------- Estimate input ---------- */
+    .panel {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-top: 22px;
+      padding: 22px 22px 24px;
+    }
+    .panel label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .input-row {
+      display: flex;
+      align-items: center;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 6px 16px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      background: #fff;
+    }
+    .input-row:focus-within {
+      border-color: var(--steel);
+      box-shadow: 0 0 0 4px rgba(27, 117, 224, 0.12);
+    }
+    .input-row .dollar {
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-right: 4px;
+    }
+    #estimate {
+      border: none;
+      outline: none;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--navy);
+      width: 100%;
+      padding: 8px 0;
+      background: transparent;
+      font-family: inherit;
+    }
+    #estimate::placeholder { color: #b7c2cf; }
+    .hint {
+      margin-top: 10px;
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+    .quick {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .quick button {
+      border: 1px solid var(--line);
+      background: #f7fafd;
+      color: var(--navy);
+      font-weight: 600;
+      font-size: 13px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.12s, border-color 0.12s;
+    }
+    .quick button:hover { background: #eef4fb; border-color: #c9d8e8; }
+
+    /* ---------- Plans ---------- */
+    .plans { margin-top: 8px; }
+    .section-title {
+      margin: 26px 4px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .plan {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--line);
+      padding: 20px 22px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .plan.featured {
+      border: 2px solid var(--amber);
+      box-shadow: 0 10px 26px rgba(245, 166, 35, 0.18);
+    }
+    .plan .left { min-width: 0; }
+    .plan .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--amber-dark);
+      background: #fdf3e0;
+      border-radius: 999px;
+      padding: 3px 10px;
+      margin-bottom: 8px;
+    }
+    .plan .name {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.2;
+    }
+    .plan .terms {
+      font-size: 13.5px;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+    .plan .right {
+      text-align: right;
+      flex: none;
+    }
+    .plan .pay {
+      font-size: 30px;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .plan .pay .per {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .plan .pay.special {
+      font-size: 20px;
+      color: var(--amber-dark);
+    }
+    .plan .subnote {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .empty {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      padding: 30px 10px 10px;
+    }
+
+    /* ---------- Footer ---------- */
+    .disclaimer {
+      margin-top: 24px;
+      font-size: 11.5px;
+      line-height: 1.6;
+      color: #8493a3;
+      text-align: center;
+      padding: 0 6px;
+    }
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+      justify-content: center;
+    }
+    .actions button {
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 13.5px;
+      border-radius: 10px;
+      padding: 11px 20px;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-print { background: var(--navy); color: #fff; }
+    .btn-print:hover { background: #08304f; }
+    .btn-clear { background: #eef2f7; color: var(--navy); }
+    .btn-clear:hover { background: #e2e9f1; }
+
+    @media (max-width: 520px) {
+      .plan { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .plan .right { text-align: left; }
+      .logo .word .main { font-size: 19px; }
+    }
+
+    /* ---------- Print ---------- */
+    @media print {
+      body { background: #fff; }
+      .quick, .actions, .hint { display: none !important; }
+      .panel, .plan { box-shadow: none; break-inside: avoid; }
+      header.brand { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <header class="brand">
+    <div class="brand-inner">
+      <div class="logo">
+        <span class="mark" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M3 11L12 4l9 7" stroke="#0a2540" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M5 10v9h14v-9" stroke="#0a2540" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="word">
+          <span class="main">Modern</span>
+          <span class="sub">Exteriors</span>
+        </span>
+      </div>
+      <h1>Financing Estimate Calculator</h1>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="panel">
+      <label for="estimate">Total Estimate Amount</label>
+      <div class="input-row">
+        <span class="dollar">$</span>
+        <input id="estimate" type="text" inputmode="decimal" autocomplete="off"
+               placeholder="0" aria-label="Total estimate amount in dollars" />
+      </div>
+      <div class="quick">
+        <button type="button" data-amt="10000">$10,000</button>
+        <button type="button" data-amt="15000">$15,000</button>
+        <button type="button" data-amt="20000">$20,000</button>
+        <button type="button" data-amt="30000">$30,000</button>
+        <button type="button" data-amt="50000">$50,000</button>
+      </div>
+      <p class="hint">Enter the total project estimate to see monthly payment options.</p>
+    </div>
+
+    <div class="section-title">Payment Options</div>
+    <div id="plans" class="plans">
+      <div class="empty">Enter an estimate amount above to view financing plans.</div>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn-print" onclick="window.print()">Print / Save PDF</button>
+      <button type="button" class="btn-clear" id="clearBtn">Clear</button>
+    </div>
+
+    <p class="disclaimer">
+      Estimated monthly payments are for illustration only and assume financing of the full
+      estimate amount. Actual rates, terms, promotional offers, and approval are subject to
+      lender credit review and may vary. Modern Exteriors is not a lender. This is not a
+      commitment to lend or a credit offer.
+    </p>
+  </div>
+
+  <script>
+    // Financing plans, top-down, in the requested order.
+    // "deferred" plans show a text note instead of a monthly payment.
+    var PLANS = [
+      { name: "9.99% APR",  apr: 9.99, months: 120 },
+      { name: "9.99% APR",  apr: 9.99, months: 180 },
+      { name: "6.99% APR",  apr: 6.99, months: 180, featured: true },
+      { name: "12 Months No Interest, No Payments", deferred: true, promoMonths: 12,
+        note: "Depends on credit" }
+    ];
+
+    var money0 = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+    var money2 = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    // Standard amortized monthly payment.
+    function monthlyPayment(principal, aprPercent, months) {
+      var r = (aprPercent / 100) / 12;
+      if (r === 0) return principal / months;
+      return principal * r / (1 - Math.pow(1 + r, -months));
+    }
+
+    var estimateEl = document.getElementById("estimate");
+    var plansEl = document.getElementById("plans");
+
+    function parseAmount(str) {
+      var n = parseFloat(String(str).replace(/[^0-9.]/g, ""));
+      return isNaN(n) ? 0 : n;
+    }
+
+    function render() {
+      var amount = parseAmount(estimateEl.value);
+
+      if (amount <= 0) {
+        plansEl.innerHTML = '<div class="empty">Enter an estimate amount above to view financing plans.</div>';
+        return;
+      }
+
+      var html = "";
+      PLANS.forEach(function (p) {
+        var featured = p.featured ? " featured" : "";
+        var badge = p.featured ? '<span class="badge">Lowest Rate</span>' : "";
+
+        var right;
+        if (p.deferred) {
+          right =
+            '<div class="pay special">' + p.note + '</div>' +
+            '<div class="subnote">No payments &amp; no interest for ' + p.promoMonths + ' months, if paid in full</div>';
+        } else {
+          var pay = monthlyPayment(amount, p.apr, p.months);
+          var total = pay * p.months;
+          right =
+            '<div class="pay">' + money2.format(pay) + '<span class="per"> /mo</span></div>' +
+            '<div class="subnote">' + p.months + ' payments &middot; ' + money0.format(total) + ' total</div>';
+        }
+
+        var terms;
+        if (p.deferred) {
+          terms = "Deferred interest promotion";
+        } else {
+          terms = p.months + " months (" + (p.months / 12) + " yrs) &middot; " + p.apr + "% APR";
+        }
+
+        html +=
+          '<div class="plan' + featured + '">' +
+            '<div class="left">' +
+              badge +
+              '<div class="name">' + p.name + '</div>' +
+              '<div class="terms">' + terms + '</div>' +
+            '</div>' +
+            '<div class="right">' + right + '</div>' +
+          '</div>';
+      });
+
+      plansEl.innerHTML = html;
+    }
+
+    // Format the estimate field with thousands separators while typing.
+    function formatInput() {
+      var raw = estimateEl.value.replace(/[^0-9.]/g, "");
+      var parts = raw.split(".");
+      var intPart = parts[0] || "";
+      var dec = parts.length > 1 ? "." + parts[1].slice(0, 2) : "";
+      if (intPart) {
+        intPart = parseInt(intPart, 10).toLocaleString("en-US");
+      }
+      estimateEl.value = intPart + dec;
+    }
+
+    estimateEl.addEventListener("input", function () {
+      formatInput();
+      render();
+    });
+
+    document.querySelectorAll(".quick button").forEach(function (b) {
+      b.addEventListener("click", function () {
+        estimateEl.value = parseInt(b.dataset.amt, 10).toLocaleString("en-US");
+        render();
+        estimateEl.focus();
+      });
+    });
+
+    document.getElementById("clearBtn").addEventListener("click", function () {
+      estimateEl.value = "";
+      render();
+      estimateEl.focus();
+    });
+
+    render();
+  </script>
+</body>
+</html>
