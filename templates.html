@@ -101,42 +101,32 @@
     letter-spacing: 0.16em; color: var(--header-sub); opacity: 0.9;
   }
 
-  /* Template picker (single for now, ready for more) */
-  .tpl-bar {
-    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-    margin-top: 24px;
+  .tpl-name {
+    margin: 26px 2px 6px; font-size: 13px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
   }
-  .tpl-bar .sub {
-    font-size: 13px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.08em; color: var(--muted); margin: 0;
-  }
-  .tpl-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
-  .tpl-tab {
-    font-family: inherit; font-size: 13.5px; font-weight: 700;
-    color: #fff; background: var(--indigo); border: none;
-    padding: 9px 15px; border-radius: 999px; cursor: pointer;
-    -webkit-tap-highlight-color: transparent; touch-action: manipulation;
-  }
+  .tpl-hint { margin: 0 2px 4px; font-size: 12.5px; color: var(--muted); }
 
   .card {
     background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
-    box-shadow: var(--shadow); padding: 18px; margin-top: 16px;
+    box-shadow: var(--shadow-sm); padding: 18px; margin-top: 16px;
   }
   .card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
   .card-head .name { font-size: 16px; font-weight: 800; color: var(--ink); }
 
-  #template {
-    width: 100%; min-height: 640px;
+  .tmpl {
+    width: 100%;
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
     font-size: 13.5px; line-height: 1.6; color: var(--ink);
     background: var(--input-bg); border: 1px solid var(--line); border-radius: 12px;
-    padding: 16px; resize: vertical; outline: none; white-space: pre; overflow-wrap: normal;
+    padding: 15px; resize: vertical; outline: none;
+    white-space: pre-wrap; overflow-wrap: break-word;
   }
-  #template:focus { border-color: var(--indigo-bright); box-shadow: 0 0 0 3px rgba(90, 75, 166, 0.15); }
+  .tmpl:focus { border-color: var(--indigo-bright); box-shadow: 0 0 0 3px rgba(90, 75, 166, 0.15); }
 
   .btn {
-    font-family: inherit; font-weight: 700; font-size: 14px; letter-spacing: 0.02em;
-    border-radius: 10px; padding: 10px 16px; min-height: 44px; cursor: pointer; border: none;
+    font-family: inherit; font-weight: 700; font-size: 13.5px; letter-spacing: 0.02em;
+    border-radius: 10px; padding: 9px 16px; min-height: 42px; cursor: pointer; border: none;
     -webkit-tap-highlight-color: transparent; touch-action: manipulation;
   }
   .btn:focus-visible { outline: 3px solid var(--indigo-bright); outline-offset: 2px; }
@@ -145,7 +135,7 @@
   .btn-copy.done { background: #1f9d55; }
   .btn-ghost { background: var(--chip); color: var(--ink); border: 1px solid var(--line); }
   .btn-ghost:hover { background: var(--chip-hover); }
-  .actions-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+  .actions-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
 
   footer.brandfoot {
     background: var(--footer-navy); color: var(--footer-muted);
@@ -159,14 +149,14 @@
     .logo .word .l1, .logo .word .l2 { font-size: 29px; }
     .logo .roofline { width: 100px; }
     header.brand h1 { font-size: 18px; }
-    #template { font-size: 13px; }
+    .tmpl { font-size: 13px; }
   }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
   @media print {
     body { background: #fff; }
-    header.brand, .tpl-bar, .actions-row, .card-head, footer.brandfoot { display: none !important; }
-    .card { box-shadow: none; border: none; padding: 0; }
-    #template { border: none; background: #fff; min-height: 0; }
+    header.brand, .actions-row, .card-head, footer.brandfoot, .tpl-hint { display: none !important; }
+    .card { box-shadow: none; border: none; padding: 0 0 14px; break-inside: avoid; }
+    .tmpl { border: none; background: #fff; }
   }
 </style>
 </head>
@@ -187,19 +177,15 @@
 </header>
 
 <div class="wrap">
-  <div class="tpl-bar">
-    <span class="sub">Template</span>
-    <div class="tpl-tabs">
-      <button type="button" class="tpl-tab" data-target="tpl-callpilot">Call Pilot</button>
-    </div>
-  </div>
+  <div class="tpl-name">Call Pilot</div>
+  <p class="tpl-hint">Each section copies on its own — Call Pilot, Install Notes, and Sales Notes are separate.</p>
 
   <div class="card">
     <div class="card-head">
       <span class="name">Call Pilot</span>
       <button type="button" class="btn btn-copy" data-copy>Copy</button>
     </div>
-    <textarea id="template" spellcheck="false" aria-label="Call Pilot template">Call Pilot:
+    <textarea class="tmpl" rows="16" spellcheck="false" aria-label="Call Pilot section">Call Pilot:
 Customer Name:
 Customer Email:
 Total:
@@ -214,10 +200,15 @@ Home Type:
 Shingle Color:
 Shadow Rep: N/A
 Hoa:
-To:
-_________
+To: </textarea>
+  </div>
 
-Install Notes
+  <div class="card">
+    <div class="card-head">
+      <span class="name">Install Notes</span>
+      <button type="button" class="btn btn-copy" data-copy>Copy</button>
+    </div>
+    <textarea class="tmpl" rows="21" spellcheck="false" aria-label="Install Notes section">Install Notes
 
 Package: (premium/gold)
 
@@ -237,11 +228,15 @@ Sections omitted from estimate: (no/yes and location)
 
 Satellite Dish or other equipment removed from roof: (no/yes with details)
 
-Additional Details: (landscaping, fences, no driveway, etc)
+Additional Details: (landscaping, fences, no driveway, etc)</textarea>
+  </div>
 
-————————————-
-
-Sales Notes
+  <div class="card">
+    <div class="card-head">
+      <span class="name">Sales Notes</span>
+      <button type="button" class="btn btn-copy" data-copy>Copy</button>
+    </div>
+    <textarea class="tmpl" rows="11" spellcheck="false" aria-label="Sales Notes section">Sales Notes
 
 Decision Maker Name:
 
@@ -252,10 +247,11 @@ Finance Details:
 Total:
 
 Other Customer Details: </textarea>
-    <div class="actions-row">
-      <button type="button" class="btn btn-ghost" onclick="window.print()">Print / Save PDF</button>
-      <button type="button" class="btn btn-ghost" data-reset>Reset template</button>
-    </div>
+  </div>
+
+  <div class="actions-row">
+    <button type="button" class="btn btn-ghost" onclick="window.print()">Print / Save PDF</button>
+    <button type="button" class="btn btn-ghost" id="resetBtn">Reset template</button>
   </div>
 </div>
 
@@ -264,11 +260,7 @@ Other Customer Details: </textarea>
 </footer>
 
 <script>
-  var ta = document.getElementById("template");
-  var original = ta.value;
-
-  document.querySelector("[data-copy]").addEventListener("click", function () {
-    var btn = this;
+  function copyFrom(ta, btn) {
     function done() {
       btn.textContent = "Copied ✓"; btn.classList.add("done");
       setTimeout(function () { btn.textContent = "Copy"; btn.classList.remove("done"); }, 1600);
@@ -280,11 +272,16 @@ Other Customer Details: </textarea>
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(ta.value).then(done, fallback);
     } else { fallback(); }
+  }
+
+  document.querySelectorAll("[data-copy]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      copyFrom(btn.closest(".card").querySelector(".tmpl"), btn);
+    });
   });
 
-  document.querySelector("[data-reset]").addEventListener("click", function () {
-    ta.value = original;
-    ta.scrollTop = 0;
+  document.getElementById("resetBtn").addEventListener("click", function () {
+    document.querySelectorAll(".tmpl").forEach(function (ta) { ta.value = ta.defaultValue; });
   });
 </script>
 </body>
