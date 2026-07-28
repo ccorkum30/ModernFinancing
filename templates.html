@@ -86,16 +86,17 @@
   }
   .home-link:hover { background: rgba(255, 255, 255, 0.22); }
   .home-link:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
-  .logo { position: relative; display: inline-block; padding-top: 14px; }
-  .logo .roofline { position: absolute; top: 0; left: -4px; width: 116px; height: 26px; overflow: visible; }
+  .logo { position: relative; display: inline-block; padding-top: 14px; text-decoration: none; }
+  .logo:hover { opacity: 0.92; }
+  .logo .roofline { position: absolute; top: 0; left: -4px; width: clamp(96px, 30vw, 116px); height: 26px; overflow: visible; }
   .logo .word {
     display: flex; flex-direction: column; align-items: flex-start;
     line-height: 0.94; letter-spacing: -0.005em;
     font-family: "Arial Black", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 800; color: #fff;
   }
-  .logo .word .l1, .logo .word .l2 { font-size: 34px; }
-  header.brand h1 { margin: 0; font-size: 20px; font-weight: 400; font-style: italic; color: var(--header-sub); }
+  .logo .word .l1, .logo .word .l2 { font-size: clamp(26px, 8vw, 34px); }
+  header.brand h1 { margin: 0; font-size: clamp(16px, 4.6vw, 20px); font-weight: 400; font-style: italic; color: var(--header-sub); }
   .brand-eyebrow {
     font-size: 11px; font-weight: 700; text-transform: uppercase;
     letter-spacing: 0.16em; color: var(--header-sub); opacity: 0.9;
@@ -146,9 +147,6 @@
 
   @media (max-width: 380px) {
     .wrap { padding: 0 14px 40px; }
-    .logo .word .l1, .logo .word .l2 { font-size: 29px; }
-    .logo .roofline { width: 100px; }
-    header.brand h1 { font-size: 18px; }
     .tmpl { font-size: 13px; }
   }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
@@ -163,14 +161,19 @@
 <body>
 <header class="brand">
   <div class="brand-inner">
-    <a class="home-link" href="index.html">&lsaquo;&nbsp; All Tools</a>
-    <div class="logo">
+    <a class="home-link" href="index.html">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/>
+      </svg>
+      Home
+    </a>
+    <a class="logo" href="index.html" aria-label="Modern Exteriors home">
       <svg class="roofline" viewBox="0 0 116 26" fill="none" aria-hidden="true">
         <path d="M2 24 L2 20 L40 2 L74 20" stroke="#ffffff" stroke-width="3.4"
               stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       <span class="word"><span class="l1">Modern</span><span class="l2">Exteriors</span></span>
-    </div>
+    </a>
     <div class="brand-eyebrow">Sales Templates</div>
     <h1 class="serif">Templates</h1>
   </div>

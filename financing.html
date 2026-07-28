@@ -112,10 +112,11 @@
   }
 
   /* Reproduced roofline wordmark */
-  .logo { position: relative; display: inline-block; padding-top: 14px; }
+  .logo { position: relative; display: inline-block; padding-top: 14px; text-decoration: none; }
+  .logo:hover { opacity: 0.92; }
   .logo .roofline {
     position: absolute; top: 0; left: -4px;
-    width: 116px; height: 26px; overflow: visible;
+    width: clamp(96px, 30vw, 116px); height: 26px; overflow: visible;
   }
   .logo .word {
     display: flex; flex-direction: column; align-items: flex-start;
@@ -123,10 +124,10 @@
     font-family: "Arial Black", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 800; color: #fff;
   }
-  .logo .word .l1 { font-size: 34px; }
-  .logo .word .l2 { font-size: 34px; }
+  .logo .word .l1 { font-size: clamp(26px, 8vw, 34px); }
+  .logo .word .l2 { font-size: clamp(26px, 8vw, 34px); }
   header.brand h1 {
-    margin: 0; font-size: 19px; font-weight: 400; font-style: italic;
+    margin: 0; font-size: clamp(16px, 4.6vw, 19px); font-weight: 400; font-style: italic;
     color: var(--header-sub); letter-spacing: 0.01em;
   }
   .brand-eyebrow {
@@ -168,10 +169,10 @@
     border-color: var(--indigo-bright);
     box-shadow: 0 0 0 4px rgba(90, 75, 166, 0.20);
   }
-  .input-row .dollar { font-size: 30px; font-weight: 700; color: var(--ink); margin-right: 4px; }
+  .input-row .dollar { font-size: clamp(23px, 7vw, 30px); font-weight: 700; color: var(--ink); margin-right: 4px; }
   #estimate {
     border: none; outline: none;
-    font-size: 30px; font-weight: 700; color: var(--ink);
+    font-size: clamp(23px, 7vw, 30px); font-weight: 700; color: var(--ink);
     width: 100%; padding: 8px 0; background: transparent; font-family: inherit;
   }
   #estimate::placeholder { color: var(--muted); opacity: 0.5; }
@@ -209,9 +210,9 @@
   .plan .name { font-size: 18px; font-weight: 800; color: var(--ink); line-height: 1.2; overflow-wrap: break-word; }
   .plan .terms { font-size: 13.5px; color: var(--muted); margin-top: 5px; }
   .plan .right { text-align: right; flex: none; }
-  .plan .pay { font-size: 30px; font-weight: 800; color: var(--ink); line-height: 1; white-space: nowrap; }
+  .plan .pay { font-size: clamp(22px, 6.5vw, 30px); font-weight: 800; color: var(--ink); line-height: 1; white-space: nowrap; }
   .plan .pay .per { font-size: 13px; font-weight: 600; color: var(--muted); }
-  .plan .pay.special { font-size: 20px; color: var(--copper-dark); }
+  .plan .pay.special { font-size: clamp(17px, 5vw, 20px); color: var(--copper-dark); }
   .plan .subnote { font-size: 12px; color: var(--muted); margin-top: 6px; }
 
   .empty { text-align: center; color: var(--muted); font-size: 14px; padding: 30px 10px 10px; }
@@ -277,12 +278,7 @@
   }
   @media (max-width: 380px) {
     .wrap { padding: 0 14px 40px; }
-    .input-row .dollar, #estimate { font-size: 26px; }
-    .plan .pay { font-size: 26px; }
     .plan .name { font-size: 16.5px; }
-    .logo .word .l1, .logo .word .l2 { font-size: 29px; }
-    .logo .roofline { width: 100px; }
-    header.brand h1 { font-size: 17px; }
   }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 
@@ -297,8 +293,13 @@
 <body>
 <header class="brand">
   <div class="brand-inner">
-    <a class="home-link" href="index.html">&lsaquo;&nbsp; All Tools</a>
-    <div class="logo">
+    <a class="home-link" href="index.html">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/>
+      </svg>
+      Home
+    </a>
+    <a class="logo" href="index.html" aria-label="Modern Exteriors home">
       <svg class="roofline" viewBox="0 0 116 26" fill="none" aria-hidden="true">
         <path d="M2 24 L2 20 L40 2 L74 20" stroke="#ffffff" stroke-width="3.4"
               stroke-linecap="round" stroke-linejoin="round"/>
@@ -307,7 +308,7 @@
         <span class="l1">Modern</span>
         <span class="l2">Exteriors</span>
       </span>
-    </div>
+    </a>
     <div class="brand-eyebrow">Licensed &amp; Insured &middot; DE &middot; PA &middot; NJ &middot; MD &middot; VA</div>
     <h1 class="serif">Financing Estimate Calculator</h1>
   </div>
