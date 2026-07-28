@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern Exteriors — Call Pilot</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --indigo: #4a3c8c;
+    --indigo-deep: #342d6b;
+    --indigo-bright: #5a4ba6;
+    --copper: #c4895a;
+    --copper-dark: #a96f3f;
+
+    --bg: #f3f1f9;
+    --card: #ffffff;
+    --ink: #21243d;
+    --muted: #6b6a86;
+    --line: #e7e4f1;
+    --chip: #f6f4fc;
+    --chip-hover: #ede9f8;
+    --input-bg: #ffffff;
+    --footer-navy: #12213a;
+    --footer-ink: #e7ecf5;
+    --footer-muted: #9fb0c8;
+    --header-from: #4e4199;
+    --header-to: #342d6b;
+    --header-sub: #d3ccec;
+    --shadow: 0 12px 32px rgba(52, 45, 107, 0.12);
+    --shadow-sm: 0 2px 8px rgba(52, 45, 107, 0.08);
+    --radius: 16px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1326; --card: #191d38; --ink: #ecebf6; --muted: #a6a3c6;
+      --line: #2b2f52; --chip: #171b34; --chip-hover: #232746; --input-bg: #141834;
+      --footer-navy: #0b1626; --footer-ink: #e7ecf5; --footer-muted: #93a4bd;
+      --header-from: #453a86; --header-to: #2a2456; --header-sub: #c3bce4;
+      --shadow: 0 14px 36px rgba(0, 0, 0, 0.5);
+      --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.4);
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #f3f1f9; --card: #ffffff; --ink: #21243d; --muted: #6b6a86;
+    --line: #e7e4f1; --chip: #f6f4fc; --chip-hover: #ede9f8; --input-bg: #ffffff;
+    --footer-navy: #12213a; --footer-ink: #e7ecf5; --footer-muted: #9fb0c8;
+    --header-from: #4e4199; --header-to: #342d6b; --header-sub: #d3ccec;
+    --shadow: 0 12px 32px rgba(52, 45, 107, 0.12);
+    --shadow-sm: 0 2px 8px rgba(52, 45, 107, 0.08);
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f1326; --card: #191d38; --ink: #ecebf6; --muted: #a6a3c6;
+    --line: #2b2f52; --chip: #171b34; --chip-hover: #232746; --input-bg: #141834;
+    --footer-navy: #0b1626; --footer-ink: #e7ecf5; --footer-muted: #93a4bd;
+    --header-from: #453a86; --header-to: #2a2456; --header-sub: #c3bce4;
+    --shadow: 0 14px 36px rgba(0, 0, 0, 0.5);
+    --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.4);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased; line-height: 1.4;
+    overflow-x: hidden; text-size-adjust: 100%; -webkit-text-size-adjust: 100%;
+  }
+  .serif { font-family: Georgia, "Times New Roman", "Iowan Old Style", serif; }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 0 18px 44px; }
+
+  /* Header */
+  header.brand {
+    background: linear-gradient(160deg, var(--header-from) 0%, var(--header-to) 100%);
+    color: #fff; padding: 30px 18px 30px; text-align: center;
+  }
+  .brand-inner {
+    max-width: 820px; margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+  }
+  .home-link {
+    align-self: flex-start;
+    display: inline-flex; align-items: center; gap: 6px;
+    color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; letter-spacing: 0.01em;
+    background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.22);
+    padding: 8px 13px; border-radius: 999px; transition: background 0.12s;
+    -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+  }
+  .home-link:hover { background: rgba(255, 255, 255, 0.22); }
+  .home-link:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+  .logo { position: relative; display: inline-block; padding-top: 14px; }
+  .logo .roofline { position: absolute; top: 0; left: -4px; width: 116px; height: 26px; overflow: visible; }
+  .logo .word {
+    display: flex; flex-direction: column; align-items: flex-start;
+    line-height: 0.94; letter-spacing: -0.005em;
+    font-family: "Arial Black", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 800; color: #fff;
+  }
+  .logo .word .l1, .logo .word .l2 { font-size: 34px; }
+  header.brand h1 { margin: 0; font-size: 20px; font-weight: 400; font-style: italic; color: var(--header-sub); }
+  .brand-eyebrow {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.16em; color: var(--header-sub); opacity: 0.9;
+  }
+
+  /* Form */
+  .tpl-section { margin-top: 24px; }
+  .sub {
+    font-size: 13px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--muted); margin: 0 2px 12px;
+  }
+  .panel {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    box-shadow: var(--shadow-sm); padding: 20px;
+  }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .field.field-big { grid-column: 1 / -1; }
+  .field label { font-size: 12.5px; font-weight: 700; color: var(--muted); letter-spacing: 0.02em; }
+  .field input, .field textarea {
+    font-family: inherit; font-size: 15px; color: var(--ink);
+    background: var(--input-bg); border: 1.5px solid var(--line); border-radius: 10px;
+    padding: 11px 13px; width: 100%; outline: none;
+    transition: border-color 0.12s, box-shadow 0.12s;
+  }
+  .field textarea { resize: vertical; line-height: 1.45; min-height: 46px; }
+  .field input:focus, .field textarea:focus {
+    border-color: var(--indigo-bright); box-shadow: 0 0 0 3px rgba(90, 75, 166, 0.18);
+  }
+  .field input::placeholder, .field textarea::placeholder { color: var(--muted); opacity: 0.55; }
+
+  /* Generated note */
+  .output-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 18px; margin-top: 26px;
+  }
+  .output-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+  #output {
+    width: 100%; min-height: 360px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 13px; line-height: 1.55; color: var(--ink);
+    background: var(--chip); border: 1px solid var(--line); border-radius: 12px;
+    padding: 14px; resize: vertical; outline: none;
+  }
+  #output:focus { border-color: var(--indigo-bright); box-shadow: 0 0 0 3px rgba(90, 75, 166, 0.15); }
+
+  .btn {
+    font-family: inherit; font-weight: 700; font-size: 14px; letter-spacing: 0.02em;
+    border-radius: 10px; padding: 11px 18px; min-height: 46px; cursor: pointer; border: none;
+    -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+  }
+  .btn:focus-visible { outline: 3px solid var(--indigo-bright); outline-offset: 2px; }
+  .btn-copy { background: var(--copper); color: #fff; }
+  .btn-copy:hover { background: var(--copper-dark); }
+  .btn-copy.done { background: #1f9d55; }
+  .btn-ghost { background: var(--chip); color: var(--ink); border: 1px solid var(--line); }
+  .btn-ghost:hover { background: var(--chip-hover); }
+  .actions-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+
+  /* Footer */
+  footer.brandfoot {
+    background: var(--footer-navy); color: var(--footer-muted);
+    padding: 22px 18px; margin-top: 34px; text-align: center;
+    font-size: 13px; letter-spacing: 0.02em;
+  }
+  footer.brandfoot a { color: var(--footer-ink); font-weight: 700; text-decoration: none; }
+
+  @media (max-width: 560px) {
+    .form-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 380px) {
+    .wrap { padding: 0 14px 40px; }
+    .logo .word .l1, .logo .word .l2 { font-size: 29px; }
+    .logo .roofline { width: 100px; }
+    header.brand h1 { font-size: 18px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  @media print {
+    body { background: #fff; }
+    .panel, .actions-row, header.brand, footer.brandfoot { display: none !important; }
+    .output-card { box-shadow: none; border: none; padding: 0; }
+    #output { border: none; background: #fff; min-height: 0; }
+  }
+</style>
+</head>
+<body>
+<header class="brand">
+  <div class="brand-inner">
+    <a class="home-link" href="index.html">&lsaquo;&nbsp; All Tools</a>
+    <div class="logo">
+      <svg class="roofline" viewBox="0 0 116 26" fill="none" aria-hidden="true">
+        <path d="M2 24 L2 20 L40 2 L74 20" stroke="#ffffff" stroke-width="3.4"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="word"><span class="l1">Modern</span><span class="l2">Exteriors</span></span>
+    </div>
+    <div class="brand-eyebrow">Sales Template</div>
+    <h1 class="serif">Call Pilot</h1>
+  </div>
+</header>
+
+<div class="wrap">
+  <form id="cp-form" autocomplete="off">
+    <div class="tpl-section">
+      <div class="sub">Customer &amp; Deal</div>
+      <div class="panel"><div class="form-grid" id="grid-deal"></div></div>
+    </div>
+
+    <div class="tpl-section">
+      <div class="sub">Install Notes</div>
+      <div class="panel"><div class="form-grid" id="grid-install"></div></div>
+    </div>
+
+    <div class="tpl-section">
+      <div class="sub">Sales Notes</div>
+      <div class="panel"><div class="form-grid" id="grid-sales"></div></div>
+    </div>
+  </form>
+
+  <div class="output-card">
+    <div class="output-head">
+      <span class="sub" style="margin:0;">Generated Note</span>
+      <button type="button" class="btn btn-copy" id="copyBtn">Copy</button>
+    </div>
+    <textarea id="output" spellcheck="false" aria-label="Generated Call Pilot note"></textarea>
+    <div class="actions-row">
+      <button type="button" class="btn btn-ghost" onclick="window.print()">Print / Save PDF</button>
+      <button type="button" class="btn btn-ghost" id="clearBtn">Clear fields</button>
+    </div>
+  </div>
+</div>
+
+<footer class="brandfoot">
+  Modern Exteriors &middot; Field Tools &middot; <a href="tel:+18555566337">(855)&nbsp;556-6337</a>
+</footer>
+
+<script>
+  // Field definitions drive both the form and the generated note.
+  var DEAL = [
+    { k: "customerName",  label: "Customer Name" },
+    { k: "customerEmail", label: "Customer Email" },
+    { k: "total",         label: "Total" },
+    { k: "monthly",       label: "Monthly" },
+    { k: "down",          label: "Down" },
+    { k: "balance",       label: "Balance" },
+    { k: "finance",       label: "Finance" },
+    { k: "term",          label: "Term" },
+    { k: "interestRate",  label: "Interest Rate" },
+    { k: "installDate",   label: "Install Date" },
+    { k: "homeType",      label: "Home Type" },
+    { k: "shingleColor",  label: "Shingle Color" },
+    { k: "shadowRep",     label: "Shadow Rep", def: "N/A" },
+    { k: "hoa",           label: "Hoa" },
+    { k: "to",            label: "To" }
+  ];
+  var INSTALL = [
+    { k: "package",    label: "Package", ph: "premium / gold" },
+    { k: "solar",      label: "Solar Panels", ph: "# / no" },
+    { k: "skylights",  label: "Skylights", ph: "# / no" },
+    { k: "decking",    label: "Decking Needed", ph: "# of sheets and location", big: true },
+    { k: "structure",  label: "Additional Structure Details", ph: "no / location", big: true },
+    { k: "flatRoof",   label: "Flat Roof Details", ph: "no / flat roof square count", big: true },
+    { k: "omitted",    label: "Sections omitted from estimate", ph: "no / yes and location", big: true },
+    { k: "stories",    label: "# of stories and house type" },
+    { k: "satellite",  label: "Satellite Dish or other equipment removed from roof", ph: "no / yes with details", big: true },
+    { k: "additional", label: "Additional Details", ph: "landscaping, fences, no driveway, etc", big: true }
+  ];
+  var SALES = [
+    { k: "decisionMaker",  label: "Decision Maker Name" },
+    { k: "financier",      label: "Financier" },
+    { k: "financeDetails", label: "Finance Details", big: true },
+    { k: "salesTotal",     label: "Total" },
+    { k: "otherDetails",   label: "Other Customer Details", big: true }
+  ];
+
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+
+  function fieldHTML(f) {
+    var ph = f.ph ? ' placeholder="' + esc(f.ph) + '"' : "";
+    var big = f.big ? " field-big" : "";
+    var control = f.big
+      ? '<textarea id="' + f.k + '" rows="2"' + ph + "></textarea>"
+      : '<input id="' + f.k + '" type="text"' + ph + " />";
+    return '<div class="field' + big + '"><label for="' + f.k + '">' + esc(f.label) + "</label>" + control + "</div>";
+  }
+
+  function renderGrid(id, list) {
+    document.getElementById(id).innerHTML = list.map(fieldHTML).join("");
+  }
+  renderGrid("grid-deal", DEAL);
+  renderGrid("grid-install", INSTALL);
+  renderGrid("grid-sales", SALES);
+
+  // Apply defaults
+  DEAL.concat(INSTALL, SALES).forEach(function (f) {
+    if (f.def) document.getElementById(f.k).value = f.def;
+  });
+
+  var out = document.getElementById("output");
+
+  function val(k) {
+    var el = document.getElementById(k);
+    return el ? el.value.trim() : "";
+  }
+  function lines(list) {
+    return list.map(function (f) { return f.label + ": " + val(f.k); }).join("\n");
+  }
+
+  function build() {
+    return [
+      "Call Pilot",
+      "",
+      lines(DEAL),
+      "_________",
+      "",
+      "Install Notes",
+      "",
+      lines(INSTALL),
+      "",
+      "—————————————",
+      "",
+      "Sales Notes",
+      "",
+      lines(SALES)
+    ].join("\n");
+  }
+
+  function refresh() { out.value = build(); }
+
+  document.getElementById("cp-form").addEventListener("input", refresh);
+  refresh();
+
+  // Copy with graceful fallback
+  var copyBtn = document.getElementById("copyBtn");
+  copyBtn.addEventListener("click", function () {
+    var text = out.value;
+    function done() {
+      copyBtn.textContent = "Copied ✓";
+      copyBtn.classList.add("done");
+      setTimeout(function () { copyBtn.textContent = "Copy"; copyBtn.classList.remove("done"); }, 1600);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } else {
+      fallback();
+    }
+    function fallback() {
+      out.focus(); out.select();
+      try { document.execCommand("copy"); done(); } catch (e) { /* selection left for manual copy */ }
+    }
+  });
+
+  document.getElementById("clearBtn").addEventListener("click", function () {
+    DEAL.concat(INSTALL, SALES).forEach(function (f) {
+      document.getElementById(f.k).value = f.def || "";
+    });
+    refresh();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+</body>
+</html>
