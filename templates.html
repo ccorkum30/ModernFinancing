@@ -64,9 +64,11 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased; line-height: 1.4;
     overflow-x: hidden; text-size-adjust: 100%; -webkit-text-size-adjust: 100%;
+    min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column;
   }
   .serif { font-family: Georgia, "Times New Roman", "Iowan Old Style", serif; }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 0 18px 44px; }
+  .wrap { max-width: 760px; width: 100%; margin: 0 auto; padding: 0 18px 44px; flex: 1 0 auto; }
+  header.brand, footer.brandfoot { flex-shrink: 0; }
 
   header.brand {
     background: linear-gradient(160deg, var(--header-from) 0%, var(--header-to) 100%);

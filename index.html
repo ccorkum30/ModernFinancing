@@ -74,10 +74,15 @@
     overflow-x: hidden;
     text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
   }
 
   .serif { font-family: Georgia, "Times New Roman", "Iowan Old Style", serif; }
-  .wrap { max-width: 860px; margin: 0 auto; padding: 0 18px 44px; }
+  .wrap { max-width: 860px; width: 100%; margin: 0 auto; padding: 0 18px 44px; flex: 1 0 auto; }
+  header.brand, footer.trust { flex-shrink: 0; }
 
   /* ---------- Header / brand ---------- */
   header.brand {
