@@ -235,6 +235,20 @@
     color: var(--muted); text-align: center; padding: 0 6px; opacity: 0.9;
   }
 
+  /* Plan codes — small reference note */
+  .codes {
+    margin-top: 18px; padding: 0 8px; text-align: center;
+    font-size: 12px; line-height: 1.75; color: var(--muted);
+  }
+  .codes .lbl {
+    display: block; margin-bottom: 3px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase;
+  }
+  .codes .code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-weight: 700; color: var(--ink);
+  }
+
   /* ---------- Trust footer (full-bleed) ---------- */
   footer.trust {
     background: linear-gradient(180deg, var(--footer-navy) 0%, var(--footer-navy) 100%);
@@ -331,6 +345,14 @@
     lender credit review and may vary. Modern Exteriors is not a lender. This is not a
     commitment to lend or a credit offer.
   </p>
+
+  <div class="codes">
+    <span class="lbl">Plan Codes</span>
+    <div>1st &middot; Code <span class="code">4132</span> &mdash; 9.99%, 120 months (0.0132)</div>
+    <div>2nd &middot; Code <span class="code">4107</span> &mdash; 9.99%, 180 months (0.0107)</div>
+    <div>3rd &middot; Code <span class="code">2012</span> &mdash; No Interest / No Payment</div>
+    <div>4th &middot; Code <span class="code">4089</span> &mdash; 6.99%, 180 months (0.0089)</div>
+  </div>
 </div>
 
 <footer class="trust">
