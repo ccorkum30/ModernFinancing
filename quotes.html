@@ -259,34 +259,22 @@
 
 <script>
   /* ---- Image source ----
-     PHOTOS holds each image as { thumb, full }.
-     This build is wired to load from Google Drive; if we switch to
-     self-hosted files, these become "images/quotes/xxxx.jpg" paths. */
-  var DRIVE_IDS = [
-    "1fLLA49k6QFw8WE6nIw4IN5mIMauYcU7D", "12wJ0NUx2wLGN1Kz6Tc6eNwleZYuTaATQ",
-    "1U8IH-cfC7kdiJKK9cDw_BcZ4i6yHVTY1", "16df4SGug8o6iepIx5a5Aly4zW-v0t5EU",
-    "1YqjiBkQFxqeSkAKdkk0ruVtSJN5copXA", "1pNaVeJz9nBGzghAlxz0ImfI9vVpkkWtM",
-    "1Fe1geX28gDn_6IM36trg7YVDoZSPK6Nk", "1MgqhCVrJ_E-lcQ-hCxaZIdFrip2sraQQ",
-    "1oiSlg5HTYfKo6cQbPc3_7_ao7bH1ScW6", "1Yss291vn25dZFVOaxQ-BKaRaE7HoPKnE",
-    "1uzNSC15caUNAuQAdWbdnH12w9aN6dhIe", "1kAlLS6nn1mH1XTis0XxQImKOc1y-q50j",
-    "1srlSarnkTrqzrmo7O0yEvGIMkUQuHlzX", "1vLMRKEwbpdzHfB5Y4HJpLsMGpQUoDk-c",
-    "1kJIj_oLJV9A9mYhMoOGKK6Uh0aLG35bo", "1wvd609JbhXd1l1hDoNgeKWkvbM9ns6c7",
-    "1tVX6PlEX2sDeLqEi5yZ5V5ACvlIKQL9n", "1lEufGHkF6cx92crazAwHlE4Cb_0-T2s7",
-    "1g3p4tcxqflVO4qaEGME7gVzUH740JuOD", "1lzJBM8lvPV1XXMtRTHYhA_6_jcuyqVhu",
-    "1K5gxBVViQQ4VXoR2akJtP0U6oxrcZmww", "1jCtkz4J3wlomS1XUmVoQqUnty2Obej-p",
-    "1d8vhWjjwPMwr4MQ5i_1EhGTwSY9lRogn", "1rwuUvjqNIohtQNxtS04IZzEKGX66764i",
-    "1U9gYNVWS_ymcLpsb6dniXZeAIg4hWoAt", "1yzUueIPvCFvWXRv_gRUxzFZGfrLyfGx_",
-    "18gwy3ok33ng24Q5P8agWwmjyzK7tW9Wh", "1AwwvfksMCivGrjrN2JI9wyxPC8Emw3ZG",
-    "1i782n4VRl9icEv-PwwoNLLIPofJdGmra", "1KSdnuPfOKYwwravyZhviqqti6c6pTBxl",
-    "1WlY0K_2-VEEMqcl27tb8aNza-dO9UmUu", "1wrsusroB6jhIh7jy3owIxRDPG-TQxxwp",
-    "1bXa9pvDKspqmc_8Jp7rdXb9MH2vED4et", "1PSGe12S8TEibqbcumAGAvZASRDEROjVB",
-    "1rEra-lu463brRpUWhYnp39UMfjGLAV3G", "1kF5zoKKCAOZsz3cAEV3tGaGSp9iDrprd",
-    "1gr0nr61NzTg9qupLj2_eWD93aCFWIG4g"
+     Self-hosted in images/quotes/. Grid uses lightweight thumbnails
+     (images/quotes/thumbs/*.jpg); the lightbox loads the full-size file. */
+  var FILES = [
+    "IMG_0074.PNG","IMG_0075.PNG","IMG_0076.JPG","IMG_0077.JPG","IMG_0078.JPG",
+    "IMG_0079.JPG","IMG_0080.JPG","IMG_0081.PNG","IMG_0082.PNG","IMG_0083.PNG",
+    "IMG_0084.JPG","IMG_0085.JPG","IMG_0086.JPG","IMG_0088.PNG","IMG_0090.JPG",
+    "IMG_0091.JPG","IMG_0097.PNG","IMG_0098.PNG","IMG_0099.PNG","IMG_0100.PNG",
+    "IMG_0101.PNG","IMG_0103.PNG","IMG_0104.PNG","IMG_0108.JPG","IMG_0111.PNG",
+    "IMG_0112.PNG","IMG_0113.PNG","IMG_0114.PNG","IMG_0115.PNG","IMG_0116.PNG",
+    "IMG_0117.JPG","IMG_0118.JPG","IMG_0119.JPG","IMG_0120.JPG","IMG_0121.JPG",
+    "IMG_0122.JPG","IMG_0123.JPG"
   ];
-  var PHOTOS = DRIVE_IDS.map(function (id) {
+  var PHOTOS = FILES.map(function (f) {
     return {
-      thumb: "https://drive.google.com/thumbnail?id=" + id + "&sz=w600",
-      full: "https://drive.google.com/thumbnail?id=" + id + "&sz=w1920"
+      thumb: "images/quotes/thumbs/" + f.replace(/\.[^.]+$/, "") + ".jpg",
+      full: "images/quotes/" + f
     };
   });
 
