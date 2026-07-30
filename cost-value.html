@@ -120,15 +120,20 @@
     background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
     box-shadow: var(--shadow-sm); padding: 18px 18px 16px;
   }
-  .stat .pct {
-    font-size: clamp(30px, 9vw, 40px); font-weight: 800; color: var(--copper-dark);
-    line-height: 1; font-variant-numeric: tabular-nums;
+  .stat .proj { font-size: 14px; font-weight: 800; color: var(--ink); line-height: 1.25; }
+  .stat .price {
+    font-size: clamp(30px, 9vw, 42px); font-weight: 800; color: var(--copper-dark);
+    line-height: 1.05; font-variant-numeric: tabular-nums; margin-top: 8px;
   }
-  .stat .proj { font-size: 15px; font-weight: 800; color: var(--ink); margin-top: 10px; line-height: 1.25; }
-  .stat .cap { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .stat .price-cap {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--muted); margin-top: 3px;
+  }
+  .stat .recoup { font-size: 12.5px; color: var(--muted); line-height: 1.5; margin-top: 10px; }
+  .stat .recoup b { color: var(--ink); font-variant-numeric: tabular-nums; }
   .stat .scope {
     font-size: 11.5px; color: var(--muted); line-height: 1.45;
-    margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line);
+    margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line);
   }
 
   .cta-wrap { margin-top: 24px; text-align: center; }
@@ -193,43 +198,49 @@
 
 <div class="wrap">
   <p class="lede">
-    Exterior improvements consistently return more at resale than big interior projects.
-    Here are some of the <strong>top ROI highlights</strong> for our region — a great way to
-    show homeowners that a Modern Exteriors project protects their home <em>and</em> its value.
+    See what popular projects cost — and how much a homeowner gets back at resale — across our
+    region. A simple way to show that a <strong>Modern Exteriors</strong> project protects their
+    home <em>and</em> its value.
   </p>
   <span class="region-tag">2025 &middot; Middle Atlantic region</span>
 
   <div class="stat-grid">
     <div class="stat">
-      <div class="pct">58.3%</div>
       <div class="proj">Asphalt Shingle Roof Replacement</div>
-      <div class="cap">of cost recouped at resale</div>
+      <div class="price">$37,201</div>
+      <div class="price-cap">Average project cost</div>
+      <div class="recoup">Resale value <b>$21,680</b> &middot; <b>58.3%</b> recouped</div>
       <div class="scope">Based on a 30-square roof with felt paper and three-tab shingles.</div>
     </div>
     <div class="stat">
-      <div class="pct">257%</div>
       <div class="proj">Garage Door Replacement</div>
-      <div class="cap">of cost recouped at resale</div>
+      <div class="price">$4,501</div>
+      <div class="price-cap">Average project cost</div>
+      <div class="recoup">Resale value <b>$15,152</b> &middot; <b>336.6%</b> recouped</div>
     </div>
     <div class="stat">
-      <div class="pct">253%</div>
       <div class="proj">Steel Entry Door Replacement</div>
-      <div class="cap">of cost recouped at resale</div>
+      <div class="price">$2,684</div>
+      <div class="price-cap">Average project cost</div>
+      <div class="recoup">Resale value <b>$5,900</b> &middot; <b>219.8%</b> recouped</div>
     </div>
     <div class="stat">
-      <div class="pct">168%</div>
       <div class="proj">Manufactured Stone Veneer</div>
-      <div class="cap">of cost recouped at resale</div>
+      <div class="price">$13,251</div>
+      <div class="price-cap">Average project cost</div>
+      <div class="recoup">Resale value <b>$26,598</b> &middot; <b>200.7%</b> recouped</div>
     </div>
     <div class="stat">
-      <div class="pct">113%</div>
       <div class="proj">Minor Kitchen Remodel</div>
-      <div class="cap">of cost recouped at resale</div>
+      <div class="price">$31,212</div>
+      <div class="price-cap">Average project cost</div>
+      <div class="recoup">Resale value <b>$33,456</b> &middot; <b>107.2%</b> recouped</div>
     </div>
     <div class="stat">
-      <div class="pct">109%</div>
       <div class="proj">Fiber-Cement Siding Replacement</div>
-      <div class="cap">of cost recouped at resale</div>
+      <div class="price">$25,666</div>
+      <div class="price-cap">Average project cost</div>
+      <div class="recoup">Resale value <b>$25,475</b> &middot; <b>99.3%</b> recouped</div>
     </div>
   </div>
 
